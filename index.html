@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>Attract Alan's Attention</title>
+    <style>
+      body {
+        height: 100vh;
+        width: 100vw;
+        background-color: #111;
+        margin: 0;
+        padding: 0;
+      }
+      .container {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        height: 100%;
+        width: 100%;
+      }
+      h1 {
+        font-family: Roboto, sans-serif;
+        margin-top: 100px;
+        color: #fff;
+      }
+      #mainButton {
+        width: 200px;
+        height: 200px;
+        background-image: -webkit-gradient(
+          linear,
+          left top,
+          left bottom,
+          color-stop(0%, #f74d4d),
+          color-stop(100%, #f86569)
+        );
+        background-image: -moz-gradient(
+          linear,
+          left top,
+          left bottom,
+          color-stop(0%, #f74d4d),
+          color-stop(100%, #f86569)
+        );
+        border-radius: 50%;
+        box-shadow: 0 15px #e24f4f;
+        cursor: pointer;
+      }
+      #mainButton:active {
+        box-shadow: 0 0 #e24f4f;
+        transform: translateY(15px);
+        transition: 0.1s all ease-out;
+      }
+    </style>
+    <link
+      href="https://fonts.googleapis.com/css?family=Roboto|Roboto+Mono&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <div class="container">
+      <div id="mainButton" onclick="clickHandler()"></div>
+      <h1 id="buttonText">Get Alan's Attention</h1>
+    </div>
+    <script>
+      let state = 'idle';
+      const clickHandler = () => {
+        if (state === 'idle') {
+          document.getElementById('buttonText').textContent = 'Are You Sure?';
+          state = 'pending';
+        } else if (state === 'pending') {
+          // do ajax here
+          document.getElementById(
+            'buttonText',
+          ).textContent = `Get Alan's Attention`;
+          state = 'idle';
+
+          var xhttp = new XMLHttpRequest();
+
+          xhttp.open(
+            'POST',
+            'http://elzar.wilmar.house:7000/public/attentionRequest',
+            true,
+          );
+          xhttp.send();
+        }
+      };
+    </script>
+  </body>
+</html>
